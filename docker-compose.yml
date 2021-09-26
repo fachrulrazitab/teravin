@@ -7,13 +7,13 @@ services:
       - 8080:8080
     depends_on:
       - mysql_db
+    links:
+      - mysql_db:api_service
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/talenvis
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=letmein
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    links:
-      - mysql_db:app_db
   mysql_db:
       image: "mysql:8.0"
       restart: always
@@ -21,6 +21,6 @@ services:
         - 3306:3306
       environment:
         MYSQL_DATABASE: talenvis
-        MYSQL_USER: teravin
+        MYSQL_USER: talenvis
         MYSQL_PASSWORD: letmein
-        MYSQL_ROOT_PASSWORD: letmein
+        MYSQL_ROOT_PASSWORD: root
